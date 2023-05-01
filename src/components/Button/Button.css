@@ -1,0 +1,103 @@
+.button {
+    border: 2px solid #f3067d;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  
+  .button.selected {
+    box-shadow: 0 0 20px #f3067d;
+    transition-delay: 0.2s;
+    color: #f3067d;
+  
+  }
+  
+  
+  .button,
+  .button::after {
+    padding: 10px 100px;
+    font-size: 14px;
+    border: none;
+    border-radius: 100px;
+    color: rgb(5, 5, 5);
+    background-color: #e5c4d5;
+    position: relative;
+    left: 450px;
+  
+  }
+  
+   .button::after {
+    --move1: inset(50% 50% 50% 50%);
+    --move2: inset(31% 0 40% 0);
+    --move3: inset(39% 0 15% 0);
+    --move4: inset(45% 0 40% 0);
+    --move5: inset(45% 0 6% 0);
+    --move6: inset(14% 0 61% 0);
+    clip-path: var(--move1);
+    content:icon;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    color: #f3067d;
+  }  
+  
+  .button:hover::after {
+    /* animation: glitch_4011 1s; */
+    text-shadow: 10 10px 10px rgb(5, 5, 5);
+    /* animation-timing-function: steps(2, end); */
+    text-shadow: -3px -3px 0px #000000, 3px 3px 0px #000000;
+    background-color:#f3067d;
+    border: 10px solid rgb(8, 8, 8);
+  } 
+  
+ .button:hover {
+    text-shadow: -1px -1px 0px #f3067d;
+  } 
+  .button:hover {
+    background-color: transparent;
+    border: 2px solid #f3067d;
+    box-shadow: 10px  #f3067d;
+  }
+
+  .move {
+    --green: #000000;
+    font-size: 15px;
+    padding: 0.7em 2.7em;
+    letter-spacing: 0.06em;
+    position: relative;
+    font-family: inherit;
+    border-radius: 0.6em;
+    overflow: hidden;
+    transition: all 0.3s;
+    line-height: 1.4em;
+    border: 2px solid var(--green);
+    background: linear-gradient(to right, rgba(5, 5, 5, 0.1) 1%, transparent 40%, transparent 60%, rgba(27, 253, 156, 0.1) 100%);
+    color: var(--green);
+    box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+  } 
+  
+  .move:hover {
+    color: #f70404;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+  }
+  
+  .move:before {
+    content: "";
+    position: absolute;
+    left: -4em;
+    width: 4em;
+    height: 100%;
+    top: 0;
+    transition: transform .4s ease-in-out;
+    background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%, rgba(27, 253, 156, 0.1) 60%, transparent 100%);
+  }
+  
+  .move:hover:before {
+    transform: translateX(15em);
+  }

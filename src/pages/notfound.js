@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-function error() {
+function Notfound() {
 
     return (
         < div class="container" >
@@ -9,4 +8,5 @@ function error() {
         </div >
     )
 }
-export default error;
+
+export default Notfound;
