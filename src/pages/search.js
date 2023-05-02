@@ -1,36 +1,67 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import Card from "../components/Card";
+import { useEffect, useState, useCallback  } from "react";
+
+function Assitido({ javisto }) {
+  if (javisto) {
+    return <p>Assistir novamente ✔</p>;
+  }
+  return <p className="item">Assistir</p>;
+}
 
 const Search = () => {
 
-    const [searchParams] = useSearchParams();
-    const [filmes, setFilmes] = useState([]);
-    const query = searchParams.get("q");
+    const [searchTerm, setSearchTerm] = useState("");
+  const [filmes, setFilmes] = useState([]);
 
-    const getSearchedFilmes = async (url) => {
-        const res = await fetch(url);
-        const data = await res.json();
-        setFilmes(data);
-      };
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
-      useEffect(() => {
-        const searchWithQueryURL = `https://my-json-server.typicode.com/marycamila184/movies/movies?query=${query}`;
-        getSearchedFilmes(searchWithQueryURL);
-      }, [query]);
+  const searchFilmes = useCallback(async () => {
+    const response = await fetch(
+      `https://my-json-server.typicode.com/marycamila184/movies/movies?q=${searchTerm}`
+    );
+    const data = await response.json();
+    setFilmes(data);
+  }, [searchTerm]);
 
-    return (
-        
-        <div className="container">
-      <h2 className="title">
-        Resultados para: <span className="query-text">{query}</span>
-      </h2>
-      <div className="movies-container">
-        {filmes.length > 0 &&
-          filmes.map((filme) => <Card key={filme.id} filme={filme} />)}
+  useEffect(() => {
+    if (searchTerm) {
+      searchFilmes();
+    }
+  }, [searchTerm, searchFilmes]);
+
+  return (
+    <div>
+      <input class="form-control" type="text" placeholder="Busque um filme" aria-label="Search" value={searchTerm} onChange={handleSearchTermChange}></input>
+      <br></br>
+      <div className="container text-center">
+      <div className="row">
+      <div className="container text-center">
+      <div className="row">
+        {filmes.map((filme, i) => (
+          <div className="col-md-4" key={i}>
+            <div className="card">
+              <img src={`${filme.poster}`} alt={filme.titulo} className="card-img-top" />
+              <div className="card-body">
+                <h5 className="card-title">{filme.titulo} ({filme.ano}) </h5>
+                <p><b>Ano:</b> {filme.ano}</p>
+                <p><b>Imdb:</b> {filme.nota}</p>
+                <a
+                  href={`/detalhes/${filme.id}`}>
+                  <div className="btn btn-primary">
+                  <Assitido
+                  javisto={filme.assistido}
+                />
+                  </div>
+                </a>
+              </div>
+            </div>
+            
+          </div>
+                
+        ))}
       </div>
-    </div>
-      
-    )
+    </div></div></div></div>
+  );
 }
 export default Search;

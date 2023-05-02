@@ -1,7 +1,12 @@
 import "./header.css";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
+
+    const location = useLocation();
+    const isCadastroPage = location.pathname === "/cadastro";
+
+
     return (
         <div className="container">
             <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -14,11 +19,12 @@ export default function Header() {
                     <li> <Link className="nav-link" to='/'>Home</Link> </li>
                     <li> <Link className="nav-link" to='/planos'>Planos</Link> </li>
                     <li> <Link className="nav-link" to='/sobre/meunome'>Sobre</Link> </li>
-                    <li> <Link className="nav-link" to='/cadastro/'>Cadastro</Link> </li>
+                    {/* <li> <Link className="nav-link" to='/cadastro/'>Cadastro</Link> </li> */}
                 </ul>
 
                 <div className="col-md-3 text-end">
-                    <button type="button" className="btn btn-primary"><a href="/cadastro">Cadastrar</a></button>
+                {!isCadastroPage && (
+                    <button type="button" className="btn btn-primary"><a href="/cadastro">Cadastrar</a></button>)}
                 </div>
             </header>
         </div>

@@ -25,8 +25,9 @@ function Detalhes() {
             
     }, [id]);   
 
-    if (!filmes) {
-        return <p>Carregando...</p>;
+    if (!filmes.titulo) {
+        return <div class="p-3 mb-2 bg-danger text-white"><p  class="text-center">Desculpe, não foi possível encontrar os detalhes do filme. Tente novamente mais tarde!</p></div>
+        
       }
 
     return (   
